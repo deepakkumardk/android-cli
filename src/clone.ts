@@ -1,10 +1,6 @@
 import ora from "ora"
 import shelljs from "shelljs"
 
-const a = () => {
-    return "H"
-}
-
 const cloneProject = async () => {
     // const loader = ora().start()
     const command =

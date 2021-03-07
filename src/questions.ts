@@ -1,13 +1,13 @@
-import inquirer from "inquirer"
+import inquirer, { QuestionCollection } from "inquirer"
 
-const askQuestions = (projectName) => {
-    const questions = [
+const askQuestions = (projectName: string) => {
+    const questions: QuestionCollection = [
         {
             name: "appName",
             type: "input",
             message: "App Name",
             default: projectName,
-            validate: (value) => {
+            validate: (value: any) => {
                 if (value) return true
                 else return "Please enter a valid app name"
             },
@@ -17,7 +17,7 @@ const askQuestions = (projectName) => {
             type: "input",
             message: "Package Name",
             default: "com.example." + projectName,
-            validate: (value) => {
+            validate: (value: any) => {
                 if (value) return true
                 else return "Please enter a valid package name"
             },

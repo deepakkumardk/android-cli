@@ -1,16 +1,17 @@
 import chalk from "chalk"
 import fse from "fs-extra"
-import replace from "replace-in-file"
+import { replaceInFile } from "replace-in-file"
+import { AppInfo } from "../types"
 
 const templateProject = "HelloWorld"
 const templatePackageName = "com.example.helloworld"
 
-const getProjectDir = (projectName) => {
+const getProjectDir = (projectName: string) => {
     const currentDir = process.cwd() + "/" + projectName
     return currentDir
 }
 
-const initProject = async ({ projectName, packageName, appName }) => {
+const initProject = async ({ projectName, packageName, appName }: AppInfo) => {
     try {
         await fse.rename(
             process.cwd() + "/android-template",
@@ -20,10 +21,14 @@ const initProject = async ({ projectName, packageName, appName }) => {
         console.log("error occurs while initializing project", error)
     }
     await replacePackageName({ projectName, packageName, appName })
-    await renameFolders({ projectName, packageName })
+    await renameFolders({ projectName, packageName, appName })
 }
 
-const replacePackageName = async ({ projectName, packageName, appName }) => {
+const replacePackageName = async ({
+    projectName,
+    packageName,
+    appName,
+}: AppInfo) => {
     const currentDir = getProjectDir(projectName)
     const files = [currentDir + "/**"]
 
@@ -40,8 +45,8 @@ const replacePackageName = async ({ projectName, packageName, appName }) => {
         countMatches: true,
     }
     try {
-        await replace(options)
-        await replace(projectNameOptions)
+        await replaceInFile(options)
+        await replaceInFile(projectNameOptions)
     } catch (error) {
         console.log(chalk.red("Error while initializing project " + error))
     }
@@ -54,7 +59,7 @@ const replacePackageName = async ({ projectName, packageName, appName }) => {
  * packageName: string,
  * }}
  */
-const renameFolders = async ({ projectName, packageName }) => {
+const renameFolders = async ({ projectName, packageName }: AppInfo) => {
     let oldPath = templatePackageName.split(".").join("/")
     let newPath = packageName.split(".").join("/")
 
@@ -95,7 +100,12 @@ const renameFolders = async ({ projectName, packageName }) => {
     renameOneFolder({ projectName, fileName: "main", oldPath, newPath })
 }
 
-const renameOneFolder = async ({ projectName, fileName, oldPath, newPath }) => {
+const renameOneFolder = async ({
+    projectName,
+    fileName,
+    oldPath,
+    newPath,
+}: any) => {
     const currentDir =
         getProjectDir(projectName) + "/app/src/" + fileName + "/java/" + oldPath
     const newDir =

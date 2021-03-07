@@ -4,13 +4,16 @@ import chalk from "chalk"
 import { Command } from "commander"
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
-import { cloneProject } from "./src/clone.mjs"
+import { cloneProject } from "./src/clone"
 
-import { initProject } from "./src/projects.mjs"
-import { askQuestions } from "./src/questions.mjs"
-import { initUI } from "./src/ui.mjs"
+import { initProject } from "./src/projects"
+import { askQuestions } from "./src/questions"
+import { initUI } from "./src/ui"
+import { AppInfo } from "./types"
 
-let newAppInfo = {
+const program = new Command()
+
+let newAppInfo: AppInfo = {
     appName: "",
     projectName: "",
     packageName: "",
@@ -45,11 +48,7 @@ const runScript = async () => {
     }
 }
 
-runScript()
-
 const setupCommander = () => {
-    const program = new Command()
-
     program
         .option("-d, --debug", "Output extra logs")
         .option("--template <type>", "Add template path")
@@ -58,4 +57,5 @@ const setupCommander = () => {
     const options = program.opts()
 }
 
-// setupCommander()
+setupCommander()
+runScript()

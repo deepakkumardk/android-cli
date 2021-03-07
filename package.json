@@ -2,9 +2,9 @@
     "name": "android-cli",
     "version": "0.0.1",
     "description": "Android CLI",
-    "main": "index.mjs",
+    "main": "index.ts",
     "scripts": {
-        "start": "node index.mjs init",
+        "start": "node index.ts init",
         "test": "echo \"Error: no test specified\" && exit 1",
         "update": "npm uninstall -g . && npm install -g . && clear"
     },
@@ -22,8 +22,13 @@
         "shelljs": "^0.8.4",
         "yargs": "^16.2.0"
     },
-    "type": "module",
     "bin": {
-        "android-cli": "./index.mjs"
+        "android-cli": "./index.ts"
+    },
+    "devDependencies": {
+        "@types/figlet": "^1.2.1",
+        "@types/fs-extra": "^9.0.8",
+        "@types/inquirer": "^7.3.1",
+        "@types/shelljs": "^0.8.8"
     }
 }
