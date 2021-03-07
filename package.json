@@ -1,0 +1,29 @@
+{
+    "name": "android-cli",
+    "version": "0.0.1",
+    "description": "Android CLI",
+    "main": "index.mjs",
+    "scripts": {
+        "start": "node index.mjs init",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "update": "npm uninstall -g . && npm install -g . && clear"
+    },
+    "keywords": [],
+    "author": "Deepak Kumar",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "^4.1.0",
+        "commander": "^7.1.0",
+        "figlet": "^1.5.0",
+        "fs-extra": "^9.1.0",
+        "inquirer": "^8.0.0",
+        "ora": "^5.3.0",
+        "replace-in-file": "^6.2.0",
+        "shelljs": "^0.8.4",
+        "yargs": "^16.2.0"
+    },
+    "type": "module",
+    "bin": {
+        "android-cli": "./index.mjs"
+    }
+}
